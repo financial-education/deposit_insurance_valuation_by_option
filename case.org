@@ -1,0 +1,98 @@
+#+title: Pricing Deposit Insurance
+#+author: Matt Brigida
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
+
+
+* Overview
+
+Merton (1977) used option pricing methods to value deposit insurance.
+
+
+* Deposit Insurance
+
+Banks deposits are insured by the Federal Deposit Insurance Corporation (FDIC).
+
+* Option Pricing Model
+
+Let $D$ and $A$ stand for the value of the bank's deposits and assets.  Then the payment to the bank be the deposit insurer is $max(D - V, 0)$.  That is, if the value of the banks assets are less than the deposits, then the insurer must pay:
+
+$$D - V$$
+
+However if the bank's assets exceed deposits then the insurer pays \$0.
+
+** Original Black-Scholes-Merton Model
+
+** Margrabe Spread Option Model
+
+
+
+* Data
+
+
+Extract only Granville Bank. 
+
+#+BEGIN_SRC python :results output :cache yes :exports both
+import pandas as pd
+
+data = pd.read_csv("callreports_final.csv")
+
+data = data[data.rssdid == 560830]
+
+print(data.shape)
+print(data)
+#+END_SRC
+
+#+RESULTS[3f3ae5f4c2d7f5e7d441e5570bc464bf7cee68c5]:
+#+begin_example
+(152, 167)
+        rssdid  chartertype  ...  intincreloans  dividendoncommonstock
+804718  560830          200  ...            NaN                    NaN
+804719  560830          200  ...            NaN                    NaN
+804720  560830          200  ...            NaN                    NaN
+804721  560830          200  ...            NaN                    NaN
+804722  560830          200  ...            NaN                    NaN
+...        ...          ...  ...            ...                    ...
+804865  560830          200  ...          168.0                   17.0
+804866  560830          200  ...          157.0                   15.0
+804867  560830          200  ...          158.0                   15.0
+804868  560830          200  ...          157.0                   16.0
+804869  560830          200  ...          159.0                   16.0
+
+[152 rows x 167 columns]
+#+end_example
+
+
+#+BEGIN_SRC python :results output
+print("hello world")
+#+END_SRC
+
+#+RESULTS:
+: hello world
+
+* Python Implementation
+
+Below is a function which will calculate the latest cost of deposit insurance for a given bank.
+
+#+BEGIN_SRC python :session sess :results output :eval no
+def get_cost(idrssd):
+    """calculate the value of deposit insurance for a given bank using the approach of Merton (1977)""""
+    ## first calculate asset volatility 
+
+
+
+#+END_SRC
+
+
+
+* References
+
+@article{merton1977analytic,
+  title={An analytic derivation of the cost of deposit insurance and loan guarantees an application of modern option pricing theory},
+  author={Merton, Robert C},
+  journal={Journal of Banking \& Finance},
+  volume={1},
+  number={1},
+  pages={3--11},
+  year={1977},
+  publisher={Elsevier}
+}
